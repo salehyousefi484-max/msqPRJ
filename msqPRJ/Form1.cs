@@ -212,12 +212,12 @@ namespace msqPRJ
                 else if (cbAmount.Checked && !cbDate.Checked && !cbType.Checked)
                 {
 
-                    if (comboBox2.Text != "" && textBox3.Text != "")
+                    if (comboBox3.Text != "" && textBox3.Text != "")
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
                             SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@comboBox2", comboBox2.Text);
+                            cmd.Parameters.AddWithValue("@comboBox2", comboBox3.Text);
                             cmd.Parameters.AddWithValue("@Amount", textBox3.Text);
 
                             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -234,13 +234,13 @@ namespace msqPRJ
 
                 else if (!cbAmount.Checked && cbDate.Checked && !cbType.Checked)
                 {
-                    if (comboBox3.Text != "")
+                    if (comboBox2.Text != "")
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
                             SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0", con);
                             cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
-                            cmd.Parameters.AddWithValue("@comboBox3", comboBox3.Text);
+                            cmd.Parameters.AddWithValue("@comboBox3", comboBox2.Text);
 
                             SqlDataAdapter da = new SqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
@@ -277,13 +277,13 @@ namespace msqPRJ
 
                 else if (cbAmount.Checked && cbDate.Checked && !cbType.Checked)
                 {
-                    if (comboBox2.Text != "" && comboBox3.Text != "" && textBox3.Text != "")
+                    if (comboBox3.Text != "" && comboBox2.Text != "" && textBox3.Text != "")
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
                             SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@comboBox2", comboBox2.Text);
-                            cmd.Parameters.AddWithValue("@comboBox3", comboBox3.Text);
+                            cmd.Parameters.AddWithValue("@comboBox2", comboBox3.Text);
+                            cmd.Parameters.AddWithValue("@comboBox3", comboBox2.Text);
                             cmd.Parameters.AddWithValue("@Amount", textBox3.Text);
                             cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
 
@@ -301,12 +301,12 @@ namespace msqPRJ
 
                 else if (cbAmount.Checked && !cbDate.Checked && cbType.Checked)
                 {
-                    if (comboBox2.Text != "" && textBox3.Text != "" && comboBox1.Text != "")
+                    if (comboBox3.Text != "" && textBox3.Text != "" && comboBox1.Text != "")
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
                             SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND TransactionType=@TransactionType AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@comboBox2", comboBox2.Text);
+                            cmd.Parameters.AddWithValue("@comboBox2", comboBox3.Text);
                             cmd.Parameters.AddWithValue("@Amount", textBox3.Text);
                             cmd.Parameters.AddWithValue("@TransactionType", comboBox1.Text);
 
@@ -324,12 +324,12 @@ namespace msqPRJ
 
                 else if (!cbAmount.Checked && cbDate.Checked && cbType.Checked)
                 {
-                    if (comboBox1.Text != "" && comboBox3.Text != "")
+                    if (comboBox1.Text != "" && comboBox2.Text != "")
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
                             SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE TransactionType=@TransactionType AND CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@comboBox3", comboBox3.Text);
+                            cmd.Parameters.AddWithValue("@comboBox3", comboBox2.Text);
                             cmd.Parameters.AddWithValue("@TransactionType", comboBox1.Text);
                             cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
 
@@ -347,13 +347,13 @@ namespace msqPRJ
 
                 else if (cbAmount.Checked && cbDate.Checked && cbType.Checked)
                 {
-                    if (comboBox1.Text != "" && comboBox2.Text != "" && comboBox3.Text != "" && textBox3.Text != "")
+                    if (comboBox1.Text != "" && comboBox3.Text != "" && comboBox2.Text != "" && textBox3.Text != "")
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
                             SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND TransactionType=@TransactionType AND CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@comboBox2", comboBox2.Text);
-                            cmd.Parameters.AddWithValue("@comboBox3", comboBox3.Text);
+                            cmd.Parameters.AddWithValue("@comboBox2", comboBox3.Text);
+                            cmd.Parameters.AddWithValue("@comboBox3", comboBox2.Text);
                             cmd.Parameters.AddWithValue("@Amount", textBox3.Text);
                             cmd.Parameters.AddWithValue("@TransactionType", comboBox1.Text);
                             cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
@@ -371,11 +371,18 @@ namespace msqPRJ
                 }
             }
 
-            /*catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
+        private void Form1_Load_1(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'msqPRJDataSet.msqTable' table. You can move, or remove it, as needed.
+            this.msqTableTableAdapter.Fill(this.msqPRJDataSet1.msqTable);
+
         }
+
+        /*catch(Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }*/
+    }
     /*
         private void btnReport_Click(object sender, EventArgs e)
         {

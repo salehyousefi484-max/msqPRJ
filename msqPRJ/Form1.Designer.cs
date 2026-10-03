@@ -58,11 +58,34 @@ namespace msqPRJ
             this.lblTime = new System.Windows.Forms.Label();
             this.lblTxtResult = new System.Windows.Forms.Label();
             this.lblAssistant = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.msqPRJDataSet1 = new msqPRJ.msqPRJDataSet();
+            this.msqTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.msqTableTableAdapter = new msqPRJ.msqPRJDataSetTableAdapters.msqTableTableAdapter();
+            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Update = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.countOfEdit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label8 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.label10 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tP1.SuspendLayout();
+            this.tP2Reports.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msqTableBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -105,10 +128,18 @@ namespace msqPRJ
             // 
             // tP2Reports
             // 
+            this.tP2Reports.Controls.Add(this.comboBox2);
+            this.tP2Reports.Controls.Add(this.label10);
+            this.tP2Reports.Controls.Add(this.dateTimePicker2);
+            this.tP2Reports.Controls.Add(this.comboBox3);
+            this.tP2Reports.Controls.Add(this.label9);
+            this.tP2Reports.Controls.Add(this.comboBox1);
+            this.tP2Reports.Controls.Add(this.label8);
+            this.tP2Reports.Controls.Add(this.dataGridView1);
             this.tP2Reports.Location = new System.Drawing.Point(4, 25);
             this.tP2Reports.Name = "tP2Reports";
             this.tP2Reports.Padding = new System.Windows.Forms.Padding(3);
-            this.tP2Reports.Size = new System.Drawing.Size(898, 507);
+            this.tP2Reports.Size = new System.Drawing.Size(933, 610);
             this.tP2Reports.TabIndex = 1;
             this.tP2Reports.Text = "جستجو و گزارش گیری";
             this.tP2Reports.UseVisualStyleBackColor = true;
@@ -340,20 +371,218 @@ namespace msqPRJ
             this.lblAssistant.TabIndex = 15;
             this.lblAssistant.Text = "label8";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Delete,
+            this.Update,
+            this.amount,
+            this.transactionType,
+            this.date,
+            this.description,
+            this.countOfEdit,
+            this.ID});
+            this.dataGridView1.DataSource = this.msqTableBindingSource;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 166);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(927, 441);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // msqPRJDataSet1
+            // 
+            this.msqPRJDataSet1.DataSetName = "msqPRJDataSet";
+            this.msqPRJDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // msqTableBindingSource
+            // 
+            this.msqTableBindingSource.DataMember = "msqTable";
+            this.msqTableBindingSource.DataSource = this.msqPRJDataSet1;
+            // 
+            // msqTableTableAdapter
+            // 
+            this.msqTableTableAdapter.ClearBeforeFill = true;
+            // 
+            // Delete
+            // 
+            this.Delete.HeaderText = "حذف";
+            this.Delete.MinimumWidth = 6;
+            this.Delete.Name = "Delete";
+            this.Delete.ReadOnly = true;
+            this.Delete.Text = "حذف";
+            this.Delete.Width = 125;
+            // 
+            // Update
+            // 
+            this.Update.HeaderText = "ویرایش";
+            this.Update.MinimumWidth = 6;
+            this.Update.Name = "Update";
+            this.Update.ReadOnly = true;
+            this.Update.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Update.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Update.Text = "ویرایش";
+            this.Update.Width = 125;
+            // 
+            // amount
+            // 
+            this.amount.DataPropertyName = "Amount";
+            this.amount.HeaderText = "مبلغ(ریال)";
+            this.amount.MinimumWidth = 6;
+            this.amount.Name = "amount";
+            this.amount.ReadOnly = true;
+            this.amount.Width = 125;
+            // 
+            // transactionType
+            // 
+            this.transactionType.DataPropertyName = "TransactionType";
+            this.transactionType.HeaderText = "نوع تراکنش";
+            this.transactionType.MinimumWidth = 6;
+            this.transactionType.Name = "transactionType";
+            this.transactionType.ReadOnly = true;
+            this.transactionType.Width = 125;
+            // 
+            // date
+            // 
+            this.date.DataPropertyName = "Date";
+            this.date.HeaderText = "تاریخ";
+            this.date.MinimumWidth = 6;
+            this.date.Name = "date";
+            this.date.ReadOnly = true;
+            this.date.Width = 125;
+            // 
+            // description
+            // 
+            this.description.DataPropertyName = "Description";
+            this.description.HeaderText = "توضیحات";
+            this.description.MinimumWidth = 6;
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            this.description.Width = 125;
+            // 
+            // countOfEdit
+            // 
+            this.countOfEdit.DataPropertyName = "CountOfEdit";
+            this.countOfEdit.HeaderText = "تعداد ویرایش";
+            this.countOfEdit.MinimumWidth = 6;
+            this.countOfEdit.Name = "countOfEdit";
+            this.countOfEdit.ReadOnly = true;
+            this.countOfEdit.Width = 125;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "شناسه";
+            this.ID.MinimumWidth = 6;
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 125;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(33, 21);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(71, 17);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "نوع تراکنش :";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            ">",
+            ">=",
+            "=",
+            "<=",
+            "<"});
+            this.comboBox1.Location = new System.Drawing.Point(119, 18);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 2;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(33, 89);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(40, 17);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "تاریخ :";
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            ">",
+            ">=",
+            "=",
+            "<=",
+            "<"});
+            this.comboBox3.Location = new System.Drawing.Point(119, 86);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(121, 24);
+            this.comboBox3.TabIndex = 4;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(281, 89);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker2.TabIndex = 5;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(414, 21);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(67, 17);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "مبلغ (ریال) :";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            ">",
+            ">=",
+            "=",
+            "<=",
+            "<"});
+            this.comboBox2.Location = new System.Drawing.Point(531, 21);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 24);
+            this.comboBox2.TabIndex = 7;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(941, 639);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load_1);
             this.tabControl1.ResumeLayout(false);
             this.tP1.ResumeLayout(false);
             this.tP1.PerformLayout();
+            this.tP2Reports.ResumeLayout(false);
+            this.tP2Reports.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msqTableBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -386,6 +615,25 @@ namespace msqPRJ
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timerMassage;
         private System.Windows.Forms.Label lblAssistant;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private msqPRJDataSet msqPRJDataSet1;
+        private System.Windows.Forms.BindingSource msqTableBindingSource;
+        private msqPRJDataSetTableAdapters.msqTableTableAdapter msqTableTableAdapter;
+        private System.Windows.Forms.DataGridViewButtonColumn Delete;
+        private System.Windows.Forms.DataGridViewButtonColumn Update;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn countOfEdit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label8;
 
         #endregion
 
