@@ -122,11 +122,11 @@ namespace msqPRJ
             Resultant = Profit - Cost;
             lblResultant.Text = Resultant.ToString();
             if (Resultant < 0)
-                panel1.BackColor = Color.Red;
+                panel3.BackColor = Color.Red;
             else if (Resultant > 0)
-                panel1.BackColor = Color.LawnGreen;
+                panel3.BackColor = Color.LawnGreen;
             else
-                panel1.BackColor = Color.White;
+                panel3.BackColor = Color.White;
 
         }
 
@@ -179,12 +179,42 @@ namespace msqPRJ
 
         private void tbAmount_Validated(object sender, EventArgs e)
         {
-            if (tbAmount.Text != "")
+            string amountSTR = tbAmount.Text;
+            if (amountSTR != "")
             {
-                decimal Amount = Convert.ToDecimal(tbAmount.Text);
-                decimal result = Amount / 10000;
-                lblAssistant.Text = result.ToString() + " هزار تومان";
+                long Amount = Convert.ToInt64(amountSTR);
+                if (Amount >= 10000 && Amount < 10000000)
+                {
+                    long result = Amount / 10000;
+                    lblAssistant.Text = result.ToString() + " هزار تومان";
+                }
+
+                if (Amount >= 10000000 && Amount < 10000000000)
+                {
+                    long result1 = Amount % 10000;
+                    Amount /= 10000;
+                    long result2 = Amount % 1000;
+                    Amount /= 1000;
+
+                    if (result1 != 0 && result2 != 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون و " + result2.ToString() + " هزار و " + (result1 / 10).ToString() + " تومان";
+
+                    else if (result2 != 0 && result1 == 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون و " + result2.ToString() + " هزار تومان ";
+
+                    else if (result1 != 0 && result2 == 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون و " + (result1/10).ToString() + " تومان";
+
+                    else if (result1 == 0 && result2 == 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون تومان ";
+                }
+
+                if (Amount >= 10000000000)
+                    lblAssistant.Text = "این دیگه خیلی زیادیه. منم نمیتونم صفراشو بشمرم:))";
             }
+
+            else
+                lblAssistant.Text = "";
         }
 
         private string cmdT;
@@ -216,8 +246,7 @@ namespace msqPRJ
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
-                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@comboBox2", comboBox2.Text);
+                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount {comboBox2.Text} @Amount AND IsDeleted=0", con);
                             cmd.Parameters.AddWithValue("@Amount", textBox3.Text);
 
                             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -225,7 +254,8 @@ namespace msqPRJ
                             da.Fill(dt);
                             dataGridView1.DataSource = dt;
                         }
-                        cmdT = $"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND IsDeleted=0";
+                        cmdT = $"SELECT * FROM msqTable WHERE Amount {comboBox2.Text} @Amount AND IsDeleted=0";
+                        
                     }
 
                     else
@@ -238,16 +268,15 @@ namespace msqPRJ
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
-                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0", con);
+                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE CAST([Date] AS Date) {comboBox3.Text} @Date AND IsDeleted=0", con);
                             cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
-                            cmd.Parameters.AddWithValue("@comboBox3", comboBox3.Text);
 
                             SqlDataAdapter da = new SqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
                             da.Fill(dt);
                             dataGridView1.DataSource = dt;
                         }
-                        cmdT = $"SELECT * FROM msqTable WHERE CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0";
+                        cmdT = $"SELECT * FROM msqTable WHERE CAST([Date] AS Date) {comboBox3.Text} @Date AND IsDeleted=0";
                     }
 
                     else
@@ -281,9 +310,7 @@ namespace msqPRJ
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
-                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@comboBox2", comboBox2.Text);
-                            cmd.Parameters.AddWithValue("@comboBox3", comboBox3.Text);
+                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount {comboBox2.Text} @Amount AND CAST([Date] AS Date) {comboBox3.Text} @Date AND IsDeleted=0", con);
                             cmd.Parameters.AddWithValue("@Amount", textBox3.Text);
                             cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
 
@@ -292,7 +319,7 @@ namespace msqPRJ
                             da.Fill(dt);
                             dataGridView1.DataSource = dt;
                         }
-                        cmdT = $"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0";
+                        cmdT = $"SELECT * FROM msqTable WHERE Amount {comboBox2.Text} @Amount AND CAST([Date] AS Date) {comboBox3.Text} @Date AND IsDeleted=0";
                     }
 
                     else
@@ -305,8 +332,7 @@ namespace msqPRJ
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
-                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE CAST([Date] AS Date) @comboBox3 @Date AND TransactionType=@TransactionType AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@comboBox3", comboBox3.Text);
+                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE CAST([Date] AS Date) {comboBox3.Text} @Date AND TransactionType=@TransactionType AND IsDeleted=0", con);
                             cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
                             cmd.Parameters.AddWithValue("@TransactionType", comboBox1.Text);
 
@@ -315,7 +341,7 @@ namespace msqPRJ
                             da.Fill(dt);
                             dataGridView1.DataSource = dt;
                         }
-                        cmdT = $"SELECT * FROM msqTable WHERE CAST([Date] AS Date) @comboBox3 AND TransactionType=@TransactionType AND IsDeleted=0";
+                        cmdT = $"SELECT * FROM msqTable WHERE CAST([Date] AS Date) {comboBox3.Text} AND TransactionType=@TransactionType AND IsDeleted=0";
                     }
 
                     else
@@ -328,17 +354,16 @@ namespace msqPRJ
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
-                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE TransactionType=@TransactionType AND Amount @comboBox2 @Amount AND IsDeleted=0", con);
+                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE TransactionType=@TransactionType AND Amount {comboBox2.Text} @Amount AND IsDeleted=0", con);
                             cmd.Parameters.AddWithValue("@Amount", textBox3.Text);
                             cmd.Parameters.AddWithValue("@TransactionType", comboBox1.Text);
-                            cmd.Parameters.AddWithValue("@comboBox2", comboBox2.Text);
 
                             SqlDataAdapter da = new SqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
                             da.Fill(dt);
                             dataGridView1.DataSource = dt;
                         }
-                        cmdT = $"SELECT * FROM msqTable WHERE TransactionType=@TransactionType AND Amount @comboBox2 @Amount AND IsDeleted=0";
+                        cmdT = $"SELECT * FROM msqTable WHERE TransactionType=@TransactionType AND Amount {comboBox2.Text} @Amount AND IsDeleted=0";
                     }
 
                     else
@@ -351,9 +376,7 @@ namespace msqPRJ
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
-                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND TransactionType=@TransactionType AND CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@comboBox2", comboBox2.Text);
-                            cmd.Parameters.AddWithValue("@comboBox3", comboBox3.Text);
+                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount {comboBox2.Text} @Amount AND TransactionType=@TransactionType AND CAST([Date] AS Date) {comboBox3.Text} @Date AND IsDeleted=0", con);
                             cmd.Parameters.AddWithValue("@Amount", textBox3.Text);
                             cmd.Parameters.AddWithValue("@TransactionType", comboBox1.Text);
                             cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
@@ -363,7 +386,7 @@ namespace msqPRJ
                             da.Fill(dt);
                             dataGridView1.DataSource = dt;
                         }
-                        cmdT = $"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND TransactionType=@TransactionType AND CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0";
+                        cmdT = $"SELECT * FROM msqTable WHERE Amount {comboBox2.Text} @Amount AND TransactionType=@TransactionType AND CAST([Date] AS Date) {comboBox3.Text} @Date AND IsDeleted=0";
                     }
 
                     else
@@ -396,6 +419,137 @@ namespace msqPRJ
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void lblProfit_Click(object sender, EventArgs e)
+        {
+            string amountSTR = lblProfit.Text;
+            if (amountSTR != "")
+            {
+                long Amount = Convert.ToInt64(amountSTR);
+                if (Amount >= 10000 && Amount < 10000000)
+                {
+                    long result = Amount / 10000;
+                    lblAssistant.Text = result.ToString() + " هزار تومان";
+                }
+
+                if (Amount >= 10000000 && Amount < 10000000000)
+                {
+                    long result1 = Amount % 10000;
+                    Amount /= 10000;
+                    long result2 = Amount % 1000;
+                    Amount /= 1000;
+
+                    if (result1 != 0 && result2 != 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون و " + result2.ToString() + " هزار و " + (result1 / 10).ToString() + " تومان";
+
+                    else if (result2 != 0 && result1 == 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون و " + result2.ToString() + " هزار تومان ";
+
+                    else if (result1 != 0 && result2 == 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون و " + (result1 / 10).ToString() + " تومان";
+
+                    else if (result1 == 0 && result2 == 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون تومان ";
+                }
+
+                if (Amount >= 10000000000)
+                    lblAssistant.Text = "این دیگه خیلی زیادیه. منم نمیتونم صفراشو بشمرم:))";
+
+                timerClearlblAssistant.Stop();
+                timerClearlblAssistant.Start();
+            }
+
+        }
+
+        private void timerClearlblAssistant_Tick(object sender, EventArgs e)
+        {
+            timerClearlblAssistant.Stop();
+            lblAssistant.Text = "";
+        }
+
+        private void lblCost_Click(object sender, EventArgs e)
+        {
+            string amountSTR = lblCost.Text;
+            if (amountSTR != "")
+            {
+                long Amount = Convert.ToInt64(amountSTR);
+                if (Amount >= 10000 && Amount < 10000000)
+                {
+                    long result = Amount / 10000;
+                    lblAssistant.Text = result.ToString() + " هزار تومان";
+                }
+
+                if (Amount >= 10000000 && Amount < 10000000000)
+                {
+                    long result1 = Amount % 10000;
+                    Amount /= 10000;
+                    long result2 = Amount % 1000;
+                    Amount /= 1000;
+
+                    if (result1 != 0 && result2 != 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون و " + result2.ToString() + " هزار و " + (result1 / 10).ToString() + " تومان";
+
+                    else if (result2 != 0 && result1 == 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون و " + result2.ToString() + " هزار تومان ";
+
+                    else if (result1 != 0 && result2 == 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون و " + (result1 / 10).ToString() + " تومان";
+
+                    else if (result1 == 0 && result2 == 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون تومان ";
+                }
+
+                if (Amount >= 10000000000)
+                    lblAssistant.Text = "این دیگه خیلی زیادیه. منم نمیتونم صفراشو بشمرم:))";
+
+                timerClearlblAssistant.Stop();
+                timerClearlblAssistant.Start();
+            }
+        }
+
+        private void lblResultant_Click(object sender, EventArgs e)
+        {
+            string amountSTR = lblResultant.Text;
+            if (amountSTR != "")
+            {
+                long Amount = Convert.ToInt64(amountSTR);
+
+                if (Amount < 0)
+                    Amount *= (-1);
+
+                if (Amount >= 10000 && Amount < 10000000)
+                {
+                    long result = Amount / 10000;
+                    lblAssistant.Text = result.ToString() + " هزار تومان";
+                }
+
+                if (Amount >= 10000000 && Amount < 10000000000)
+                {
+                    long result1 = Amount % 10000;
+                    Amount /= 10000;
+                    long result2 = Amount % 1000;
+                    Amount /= 1000;
+
+                    if (result1 != 0 && result2 != 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون و " + result2.ToString() + " هزار و " + (result1 / 10).ToString() + " تومان";
+
+                    else if (result2 != 0 && result1 == 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون و " + result2.ToString() + " هزار تومان ";
+
+                    else if (result1 != 0 && result2 == 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون و " + (result1 / 10).ToString() + " تومان";
+
+                    else if (result1 == 0 && result2 == 0)
+                        lblAssistant.Text = Amount.ToString() + " میلیون تومان ";
+                }
+
+                if (Amount >= 10000000000)
+                    lblAssistant.Text = "این دیگه خیلی زیادیه. منم نمیتونم صفراشو بشمرم:))";
+
+                timerClearlblAssistant.Stop();
+                timerClearlblAssistant.Start();
             }
         }
     }
