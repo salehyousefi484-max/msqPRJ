@@ -64,7 +64,7 @@ namespace msqPRJ
                 lblAssistant.Text = "";
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -102,7 +102,7 @@ namespace msqPRJ
             }
 
             using (SqlConnection con1 = new SqlConnection(cs))
-            { 
+            {
                 SqlCommand cmd1 = new SqlCommand(cmdText1, con1);
                 cmd1.Parameters.AddWithValue("@Today", DateTime.Now.ToString("yyyy/MM/dd"));
                 con1.Open();
@@ -121,7 +121,7 @@ namespace msqPRJ
 
             Resultant = Profit - Cost;
             lblResultant.Text = Resultant.ToString();
-            if(Resultant < 0)
+            if (Resultant < 0)
                 panel1.BackColor = Color.Red;
             else if (Resultant > 0)
                 panel1.BackColor = Color.LawnGreen;
@@ -159,7 +159,7 @@ namespace msqPRJ
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "Update")
                 {
                     int id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ID"].Value);
-                    decimal amount = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells["amount"].Value); 
+                    decimal amount = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells["amount"].Value);
                     object date = dataGridView1.Rows[e.RowIndex].Cells["date"].Value;
                     string description = dataGridView1.Rows[e.RowIndex].Cells["description"].Value.ToString();
                     int countOfEdit = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["CountOfEdit"].Value);
@@ -171,7 +171,7 @@ namespace msqPRJ
                 }
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -191,9 +191,9 @@ namespace msqPRJ
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-           // try
-            //{
-                if (!cbAmount.Checked && !cbDate.Checked && !cbType.Checked)
+            try
+            {
+                if (!cbDate.Checked && !cbAmount.Checked && !cbType.Checked)
                 {
                     MessageBox.Show("لطفا حداقل یکی از انواع جستجو را انتخاب کنید", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -209,15 +209,15 @@ namespace msqPRJ
                     cmdT = $"SELECT * FROM msqTable WHERE IsDeleted=0";
                 }
 
-                else if (cbAmount.Checked && !cbDate.Checked && !cbType.Checked)
+                else if (!cbDate.Checked && cbAmount.Checked && !cbType.Checked)
                 {
 
-                    if (comboBox3.Text != "" && textBox3.Text != "")
+                    if (comboBox2.Text != "" && textBox3.Text != "")
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
                             SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@comboBox2", comboBox3.Text);
+                            cmd.Parameters.AddWithValue("@comboBox2", comboBox2.Text);
                             cmd.Parameters.AddWithValue("@Amount", textBox3.Text);
 
                             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -232,15 +232,15 @@ namespace msqPRJ
                         MessageBox.Show("لطفا فیلد های خواسته شده را پر کنید", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                else if (!cbAmount.Checked && cbDate.Checked && !cbType.Checked)
+                else if (cbDate.Checked && !cbAmount.Checked && !cbType.Checked)
                 {
-                    if (comboBox2.Text != "")
+                    if (comboBox3.Text != "")
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
                             SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0", con);
                             cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
-                            cmd.Parameters.AddWithValue("@comboBox3", comboBox2.Text);
+                            cmd.Parameters.AddWithValue("@comboBox3", comboBox3.Text);
 
                             SqlDataAdapter da = new SqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
@@ -254,7 +254,7 @@ namespace msqPRJ
                         MessageBox.Show("لطفا فیلد های خواسته شده را پر کنید", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                else if (!cbAmount.Checked && !cbDate.Checked && cbType.Checked)
+                else if (!cbDate.Checked && !cbAmount.Checked && cbType.Checked)
                 {
                     if (comboBox1.Text != "")
                     {
@@ -275,15 +275,15 @@ namespace msqPRJ
                         MessageBox.Show("لطفا فیلد های خواسته شده را پر کنید", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                else if (cbAmount.Checked && cbDate.Checked && !cbType.Checked)
+                else if (cbDate.Checked && cbAmount.Checked && !cbType.Checked)
                 {
                     if (comboBox3.Text != "" && comboBox2.Text != "" && textBox3.Text != "")
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
                             SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@comboBox2", comboBox3.Text);
-                            cmd.Parameters.AddWithValue("@comboBox3", comboBox2.Text);
+                            cmd.Parameters.AddWithValue("@comboBox2", comboBox2.Text);
+                            cmd.Parameters.AddWithValue("@comboBox3", comboBox3.Text);
                             cmd.Parameters.AddWithValue("@Amount", textBox3.Text);
                             cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
 
@@ -299,61 +299,61 @@ namespace msqPRJ
                         MessageBox.Show("لطفا فیلد های خواسته شده را پر کنید", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                else if (cbAmount.Checked && !cbDate.Checked && cbType.Checked)
+                else if (cbDate.Checked && !cbAmount.Checked && cbType.Checked)
                 {
-                    if (comboBox3.Text != "" && textBox3.Text != "" && comboBox1.Text != "")
+                    if (comboBox3.Text != "" && comboBox1.Text != "")
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
-                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND TransactionType=@TransactionType AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@comboBox2", comboBox3.Text);
+                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE CAST([Date] AS Date) @comboBox3 @Date AND TransactionType=@TransactionType AND IsDeleted=0", con);
+                            cmd.Parameters.AddWithValue("@comboBox3", comboBox3.Text);
+                            cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
+                            cmd.Parameters.AddWithValue("@TransactionType", comboBox1.Text);
+
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            dataGridView1.DataSource = dt;
+                        }
+                        cmdT = $"SELECT * FROM msqTable WHERE CAST([Date] AS Date) @comboBox3 AND TransactionType=@TransactionType AND IsDeleted=0";
+                    }
+
+                    else
+                        MessageBox.Show("لطفا فیلد های خواسته شده را پر کنید", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                else if (!cbDate.Checked && cbAmount.Checked && cbType.Checked)
+                {
+                    if (comboBox1.Text != "" && comboBox2.Text != "" && textBox3.Text != "")
+                    {
+                        using (SqlConnection con = new SqlConnection(cs))
+                        {
+                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE TransactionType=@TransactionType AND Amount @comboBox2 @Amount AND IsDeleted=0", con);
                             cmd.Parameters.AddWithValue("@Amount", textBox3.Text);
                             cmd.Parameters.AddWithValue("@TransactionType", comboBox1.Text);
+                            cmd.Parameters.AddWithValue("@comboBox2", comboBox2.Text);
 
                             SqlDataAdapter da = new SqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
                             da.Fill(dt);
                             dataGridView1.DataSource = dt;
                         }
-                        cmdT = $"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND TransactionType=@TransactionType AND IsDeleted=0";
+                        cmdT = $"SELECT * FROM msqTable WHERE TransactionType=@TransactionType AND Amount @comboBox2 @Amount AND IsDeleted=0";
                     }
 
                     else
                         MessageBox.Show("لطفا فیلد های خواسته شده را پر کنید", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                else if (!cbAmount.Checked && cbDate.Checked && cbType.Checked)
-                {
-                    if (comboBox1.Text != "" && comboBox2.Text != "")
-                    {
-                        using (SqlConnection con = new SqlConnection(cs))
-                        {
-                            SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE TransactionType=@TransactionType AND CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@comboBox3", comboBox2.Text);
-                            cmd.Parameters.AddWithValue("@TransactionType", comboBox1.Text);
-                            cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
-
-                            SqlDataAdapter da = new SqlDataAdapter(cmd);
-                            DataTable dt = new DataTable();
-                            da.Fill(dt);
-                            dataGridView1.DataSource = dt;
-                        }
-                        cmdT = $"SELECT * FROM msqTable WHERE TransactionType=@TransactionType AND CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0";
-                    }
-
-                    else
-                        MessageBox.Show("لطفا فیلد های خواسته شده را پر کنید", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                else if (cbAmount.Checked && cbDate.Checked && cbType.Checked)
+                
+                else if (cbDate.Checked && cbAmount.Checked && cbType.Checked)
                 {
                     if (comboBox1.Text != "" && comboBox3.Text != "" && comboBox2.Text != "" && textBox3.Text != "")
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
                             SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount @comboBox2 @Amount AND TransactionType=@TransactionType AND CAST([Date] AS Date) @comboBox3 @Date AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@comboBox2", comboBox3.Text);
-                            cmd.Parameters.AddWithValue("@comboBox3", comboBox2.Text);
+                            cmd.Parameters.AddWithValue("@comboBox2", comboBox2.Text);
+                            cmd.Parameters.AddWithValue("@comboBox3", comboBox3.Text);
                             cmd.Parameters.AddWithValue("@Amount", textBox3.Text);
                             cmd.Parameters.AddWithValue("@TransactionType", comboBox1.Text);
                             cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
@@ -371,19 +371,12 @@ namespace msqPRJ
                 }
             }
 
-        private void Form1_Load_1(object sender, EventArgs e)
-        {
-            // TODO: This line of code loads data into the 'msqPRJDataSet.msqTable' table. You can move, or remove it, as needed.
-            this.msqTableTableAdapter.Fill(this.msqPRJDataSet1.msqTable);
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        /*catch(Exception ex)
-        {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }*/
-    }
-    /*
         private void btnReport_Click(object sender, EventArgs e)
         {
             try
@@ -404,6 +397,6 @@ namespace msqPRJ
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }*/
-    
+        }
+    }
 }
