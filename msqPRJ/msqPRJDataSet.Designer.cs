@@ -429,7 +429,7 @@ namespace msqPRJ {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public msqTableRow AddmsqTableRow(decimal Amount, System.DateTime Date, string TransactionType, bool IsDeleted, System.DateTime DeletedDate, string Description, int CountOfEdit) {
+            public msqTableRow AddmsqTableRow(long Amount, System.DateTime Date, string TransactionType, bool IsDeleted, System.DateTime DeletedDate, string Description, int CountOfEdit) {
                 msqTableRow rowmsqTableRow = ((msqTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -484,7 +484,7 @@ namespace msqPRJ {
             private void InitClass() {
                 this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnID);
-                this.columnAmount = new global::System.Data.DataColumn("Amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this.columnAmount = new global::System.Data.DataColumn("Amount", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAmount);
                 this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDate);
@@ -665,9 +665,9 @@ namespace msqPRJ {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal Amount {
+            public long Amount {
                 get {
-                    return ((decimal)(this[this.tablemsqTable.AmountColumn]));
+                    return ((long)(this[this.tablemsqTable.AmountColumn]));
                 }
                 set {
                     this[this.tablemsqTable.AmountColumn] = value;
@@ -965,7 +965,7 @@ namespace msqPRJ.msqPRJDataSetTableAdapters {
             this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[msqTable] WHERE (([ID] = @Original_ID) AND ([Amount] = @Original_Amount) AND ((@IsNull_Date = 1 AND [Date] IS NULL) OR ([Date] = @Original_Date)) AND ([TransactionType] = @Original_TransactionType) AND ([IsDeleted] = @Original_IsDeleted) AND ((@IsNull_DeletedDate = 1 AND [DeletedDate] IS NULL) OR ([DeletedDate] = @Original_DeletedDate)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ([CountOfEdit] = @Original_CountOfEdit))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Amount", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "Amount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Amount", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Amount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TransactionType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TransactionType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -980,7 +980,7 @@ namespace msqPRJ.msqPRJDataSetTableAdapters {
             this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[msqTable] ([Amount], [Date], [TransactionType], [IsDeleted], [DeletedDate], [Description], [CountOfEdit]) VALUES (@Amount, @Date, @TransactionType, @IsDeleted, @DeletedDate, @Description, @CountOfEdit);
 SELECT ID, Amount, Date, TransactionType, IsDeleted, DeletedDate, Description, CountOfEdit FROM msqTable WHERE (ID = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Amount", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "Amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Amount", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TransactionType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TransactionType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsDeleted", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsDeleted", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -992,7 +992,7 @@ SELECT ID, Amount, Date, TransactionType, IsDeleted, DeletedDate, Description, C
             this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[msqTable] SET [Amount] = @Amount, [Date] = @Date, [TransactionType] = @TransactionType, [IsDeleted] = @IsDeleted, [DeletedDate] = @DeletedDate, [Description] = @Description, [CountOfEdit] = @CountOfEdit WHERE (([ID] = @Original_ID) AND ([Amount] = @Original_Amount) AND ((@IsNull_Date = 1 AND [Date] IS NULL) OR ([Date] = @Original_Date)) AND ([TransactionType] = @Original_TransactionType) AND ([IsDeleted] = @Original_IsDeleted) AND ((@IsNull_DeletedDate = 1 AND [DeletedDate] IS NULL) OR ([DeletedDate] = @Original_DeletedDate)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ([CountOfEdit] = @Original_CountOfEdit));
 SELECT ID, Amount, Date, TransactionType, IsDeleted, DeletedDate, Description, CountOfEdit FROM msqTable WHERE (ID = @ID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Amount", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "Amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Amount", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TransactionType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TransactionType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsDeleted", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsDeleted", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -1000,7 +1000,7 @@ SELECT ID, Amount, Date, TransactionType, IsDeleted, DeletedDate, Description, C
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CountOfEdit", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CountOfEdit", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Amount", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "Amount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Amount", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Amount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TransactionType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TransactionType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -1088,9 +1088,9 @@ SELECT ID, Amount, Date, TransactionType, IsDeleted, DeletedDate, Description, C
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, decimal Original_Amount, global::System.Nullable<global::System.DateTime> Original_Date, string Original_TransactionType, bool Original_IsDeleted, global::System.Nullable<global::System.DateTime> Original_DeletedDate, string Original_Description, int Original_CountOfEdit) {
+        public virtual int Delete(int Original_ID, long Original_Amount, global::System.Nullable<global::System.DateTime> Original_Date, string Original_TransactionType, bool Original_IsDeleted, global::System.Nullable<global::System.DateTime> Original_DeletedDate, string Original_Description, int Original_CountOfEdit) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_Amount));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((long)(Original_Amount));
             if ((Original_Date.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((System.DateTime)(Original_Date.Value));
@@ -1143,8 +1143,8 @@ SELECT ID, Amount, Date, TransactionType, IsDeleted, DeletedDate, Description, C
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(decimal Amount, global::System.Nullable<global::System.DateTime> Date, string TransactionType, bool IsDeleted, global::System.Nullable<global::System.DateTime> DeletedDate, string Description, int CountOfEdit) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(Amount));
+        public virtual int Insert(long Amount, global::System.Nullable<global::System.DateTime> Date, string TransactionType, bool IsDeleted, global::System.Nullable<global::System.DateTime> DeletedDate, string Description, int CountOfEdit) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((long)(Amount));
             if ((Date.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(Date.Value));
             }
@@ -1192,7 +1192,7 @@ SELECT ID, Amount, Date, TransactionType, IsDeleted, DeletedDate, Description, C
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
-                    decimal Amount, 
+                    long Amount, 
                     global::System.Nullable<global::System.DateTime> Date, 
                     string TransactionType, 
                     bool IsDeleted, 
@@ -1200,7 +1200,7 @@ SELECT ID, Amount, Date, TransactionType, IsDeleted, DeletedDate, Description, C
                     string Description, 
                     int CountOfEdit, 
                     int Original_ID, 
-                    decimal Original_Amount, 
+                    long Original_Amount, 
                     global::System.Nullable<global::System.DateTime> Original_Date, 
                     string Original_TransactionType, 
                     bool Original_IsDeleted, 
@@ -1208,7 +1208,7 @@ SELECT ID, Amount, Date, TransactionType, IsDeleted, DeletedDate, Description, C
                     string Original_Description, 
                     int Original_CountOfEdit, 
                     int ID) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(Amount));
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((long)(Amount));
             if ((Date.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(Date.Value));
             }
@@ -1236,7 +1236,7 @@ SELECT ID, Amount, Date, TransactionType, IsDeleted, DeletedDate, Description, C
             }
             this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(CountOfEdit));
             this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_Amount));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((long)(Original_Amount));
             if ((Original_Date.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[10].Value = ((System.DateTime)(Original_Date.Value));
@@ -1290,7 +1290,7 @@ SELECT ID, Amount, Date, TransactionType, IsDeleted, DeletedDate, Description, C
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal Amount, global::System.Nullable<global::System.DateTime> Date, string TransactionType, bool IsDeleted, global::System.Nullable<global::System.DateTime> DeletedDate, string Description, int CountOfEdit, int Original_ID, decimal Original_Amount, global::System.Nullable<global::System.DateTime> Original_Date, string Original_TransactionType, bool Original_IsDeleted, global::System.Nullable<global::System.DateTime> Original_DeletedDate, string Original_Description, int Original_CountOfEdit) {
+        public virtual int Update(long Amount, global::System.Nullable<global::System.DateTime> Date, string TransactionType, bool IsDeleted, global::System.Nullable<global::System.DateTime> DeletedDate, string Description, int CountOfEdit, int Original_ID, long Original_Amount, global::System.Nullable<global::System.DateTime> Original_Date, string Original_TransactionType, bool Original_IsDeleted, global::System.Nullable<global::System.DateTime> Original_DeletedDate, string Original_Description, int Original_CountOfEdit) {
             return this.Update(Amount, Date, TransactionType, IsDeleted, DeletedDate, Description, CountOfEdit, Original_ID, Original_Amount, Original_Date, Original_TransactionType, Original_IsDeleted, Original_DeletedDate, Original_Description, Original_CountOfEdit, Original_ID);
         }
     }

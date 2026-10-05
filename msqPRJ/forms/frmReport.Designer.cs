@@ -31,23 +31,13 @@ namespace msqPRJ
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.msqTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.msqPRJDataSet1 = new msqPRJ.msqPRJDataSet1();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.msqTableTableAdapter = new msqPRJ.msqPRJDataSet1TableAdapters.msqTableTableAdapter();
+            this.msqTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.msqPRJDataSet1 = new msqPRJ.msqPRJDataSet();
+            this.msqTableTableAdapter = new msqPRJ.msqPRJDataSetTableAdapters.msqTableTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.msqTableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // msqTableBindingSource
-            // 
-            this.msqTableBindingSource.DataMember = "msqTable";
-            this.msqTableBindingSource.DataSource = this.msqPRJDataSet1;
-            // 
-            // msqPRJDataSet1
-            // 
-            this.msqPRJDataSet1.DataSetName = "msqPRJDataSet1";
-            this.msqPRJDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // reportViewer1
             // 
@@ -61,6 +51,16 @@ namespace msqPRJ
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(941, 639);
             this.reportViewer1.TabIndex = 0;
+            // 
+            // msqTableBindingSource
+            // 
+            this.msqTableBindingSource.DataMember = "msqTable";
+            this.msqTableBindingSource.DataSource = this.msqPRJDataSet1;
+            // 
+            // msqPRJDataSet1
+            // 
+            this.msqPRJDataSet1.DataSetName = "msqPRJDataSet1";
+            this.msqPRJDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // msqTableTableAdapter
             // 
@@ -85,7 +85,7 @@ namespace msqPRJ
 
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.BindingSource msqTableBindingSource;
-        private msqPRJDataSet1 msqPRJDataSet1;
-        private msqPRJDataSet1TableAdapters.msqTableTableAdapter msqTableTableAdapter;
+        private msqPRJDataSet msqPRJDataSet1;
+        private msqPRJDataSetTableAdapters.msqTableTableAdapter msqTableTableAdapter;
     }
 }

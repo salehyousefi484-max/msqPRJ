@@ -70,6 +70,13 @@ namespace msqPRJ
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tP3Settings = new System.Windows.Forms.TabPage();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerMassage = new System.Windows.Forms.Timer(this.components);
+            this.timerClearlblAssistant = new System.Windows.Forms.Timer(this.components);
+            this.msqPRJDataSet = new msqPRJ.msqPRJDataSet();
+            this.msqTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.msqTableTableAdapter = new msqPRJ.msqPRJDataSetTableAdapters.msqTableTableAdapter();
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Update = new System.Windows.Forms.DataGridViewButtonColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,14 +84,7 @@ namespace msqPRJ
             this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.countOfEdit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.msqTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.msqPRJDataSet1 = new msqPRJ.msqPRJDataSet();
-            this.tP3Settings = new System.Windows.Forms.TabPage();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timerMassage = new System.Windows.Forms.Timer(this.components);
-            this.msqTableTableAdapter = new msqPRJ.msqPRJDataSetTableAdapters.msqTableTableAdapter();
-            this.timerClearlblAssistant = new System.Windows.Forms.Timer(this.components);
+            this.iD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tP1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -92,8 +92,8 @@ namespace msqPRJ
             this.panel1.SuspendLayout();
             this.tP2Reports.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.msqTableBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -532,7 +532,7 @@ namespace msqPRJ
             this.date,
             this.description,
             this.countOfEdit,
-            this.ID});
+            this.iD});
             this.dataGridView1.DataSource = this.msqTableBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridView1.Location = new System.Drawing.Point(3, 166);
@@ -543,6 +543,45 @@ namespace msqPRJ
             this.dataGridView1.Size = new System.Drawing.Size(927, 441);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // tP3Settings
+            // 
+            this.tP3Settings.Location = new System.Drawing.Point(4, 25);
+            this.tP3Settings.Name = "tP3Settings";
+            this.tP3Settings.Size = new System.Drawing.Size(933, 610);
+            this.tP3Settings.TabIndex = 2;
+            this.tP3Settings.Text = "تنظیمات";
+            this.tP3Settings.UseVisualStyleBackColor = true;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timerMassage
+            // 
+            this.timerMassage.Interval = 3000;
+            this.timerMassage.Tick += new System.EventHandler(this.timerMassage_Tick);
+            // 
+            // timerClearlblAssistant
+            // 
+            this.timerClearlblAssistant.Interval = 20000;
+            this.timerClearlblAssistant.Tick += new System.EventHandler(this.timerClearlblAssistant_Tick);
+            // 
+            // msqPRJDataSet
+            // 
+            this.msqPRJDataSet.DataSetName = "msqPRJDataSet";
+            this.msqPRJDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // msqTableBindingSource
+            // 
+            this.msqTableBindingSource.DataMember = "msqTable";
+            this.msqTableBindingSource.DataSource = this.msqPRJDataSet;
+            // 
+            // msqTableTableAdapter
+            // 
+            this.msqTableTableAdapter.ClearBeforeFill = true;
             // 
             // Delete
             // 
@@ -571,7 +610,7 @@ namespace msqPRJ
             // amount
             // 
             this.amount.DataPropertyName = "Amount";
-            this.amount.HeaderText = "مبلغ(ریال)";
+            this.amount.HeaderText = "مبلغ (ریال)";
             this.amount.MinimumWidth = 6;
             this.amount.Name = "amount";
             this.amount.ReadOnly = true;
@@ -613,53 +652,14 @@ namespace msqPRJ
             this.countOfEdit.ReadOnly = true;
             this.countOfEdit.Width = 125;
             // 
-            // ID
+            // iD
             // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "شناسه";
-            this.ID.MinimumWidth = 6;
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 125;
-            // 
-            // msqTableBindingSource
-            // 
-            this.msqTableBindingSource.DataMember = "msqTable";
-            this.msqTableBindingSource.DataSource = this.msqPRJDataSet1;
-            // 
-            // msqPRJDataSet1
-            // 
-            this.msqPRJDataSet1.DataSetName = "msqPRJDataSet";
-            this.msqPRJDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // tP3Settings
-            // 
-            this.tP3Settings.Location = new System.Drawing.Point(4, 25);
-            this.tP3Settings.Name = "tP3Settings";
-            this.tP3Settings.Size = new System.Drawing.Size(933, 610);
-            this.tP3Settings.TabIndex = 2;
-            this.tP3Settings.Text = "تنظیمات";
-            this.tP3Settings.UseVisualStyleBackColor = true;
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // timerMassage
-            // 
-            this.timerMassage.Interval = 3000;
-            this.timerMassage.Tick += new System.EventHandler(this.timerMassage_Tick);
-            // 
-            // msqTableTableAdapter
-            // 
-            this.msqTableTableAdapter.ClearBeforeFill = true;
-            // 
-            // timerClearlblAssistant
-            // 
-            this.timerClearlblAssistant.Interval = 20000;
-            this.timerClearlblAssistant.Tick += new System.EventHandler(this.timerClearlblAssistant_Tick);
+            this.iD.DataPropertyName = "ID";
+            this.iD.HeaderText = "شناسه";
+            this.iD.MinimumWidth = 6;
+            this.iD.Name = "iD";
+            this.iD.ReadOnly = true;
+            this.iD.Width = 125;
             // 
             // Form1
             // 
@@ -682,8 +682,8 @@ namespace msqPRJ
             this.tP2Reports.ResumeLayout(false);
             this.tP2Reports.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.msqTableBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -717,9 +717,6 @@ namespace msqPRJ
         private System.Windows.Forms.Timer timerMassage;
         private System.Windows.Forms.Label lblAssistant;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private msqPRJDataSet msqPRJDataSet1;
-        private System.Windows.Forms.BindingSource msqTableBindingSource;
-        private msqPRJDataSetTableAdapters.msqTableTableAdapter msqTableTableAdapter;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
@@ -734,6 +731,10 @@ namespace msqPRJ
         private System.Windows.Forms.Button btnReport;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Timer timerClearlblAssistant;
+        private msqPRJDataSet msqPRJDataSet;
+        private System.Windows.Forms.BindingSource msqTableBindingSource;
+        private msqPRJDataSetTableAdapters.msqTableTableAdapter msqTableTableAdapter;
         private System.Windows.Forms.DataGridViewButtonColumn Delete;
         private System.Windows.Forms.DataGridViewButtonColumn Update;
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
@@ -741,8 +742,7 @@ namespace msqPRJ
         private System.Windows.Forms.DataGridViewTextBoxColumn date;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridViewTextBoxColumn countOfEdit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.Timer timerClearlblAssistant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iD;
 
         #endregion
 

@@ -23,8 +23,10 @@ namespace msqPRJ
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'msqPRJDataSet.msqTable' table. You can move, or remove it, as needed.
+            this.msqTableTableAdapter.Fill(this.msqPRJDataSet.msqTable);
             // TODO: This line of code loads data into the 'msqPRJDataSet1.msqTable' table. You can move, or remove it, as needed.
-            this.msqTableTableAdapter.Fill(this.msqPRJDataSet1.msqTable);
+            this.msqTableTableAdapter.Fill(this.msqPRJDataSet.msqTable);
             //لیبل های 4 تا 6 که برای هزینه ها و سود هستش رو بنویس.
             lblTxtResult.Text = "";
             lblAssistant.Text = "";
@@ -136,7 +138,7 @@ namespace msqPRJ
             {
                 if (e.RowIndex < 0) return;
 
-                int ID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ID"].Value);
+                int ID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["iD"].Value);
 
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "Delete")
                 {
@@ -158,7 +160,7 @@ namespace msqPRJ
 
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "Update")
                 {
-                    int id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ID"].Value);
+                    int id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["iD"].Value);
                     decimal amount = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells["amount"].Value);
                     object date = dataGridView1.Rows[e.RowIndex].Cells["date"].Value;
                     string description = dataGridView1.Rows[e.RowIndex].Cells["description"].Value.ToString();
@@ -217,7 +219,7 @@ namespace msqPRJ
                 lblAssistant.Text = "";
         }
 
-        private string cmdT;
+        private string cmdT = $"SELECT * FROM msqTable WHERE IsDeleted=0";
 
         private void btnSearch_Click(object sender, EventArgs e)
         {

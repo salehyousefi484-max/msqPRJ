@@ -36,6 +36,7 @@ namespace msqPRJ
         public string cB3 { get; set; }
         public DateTime dtp { get; set; }
 
+
         private void LoadReportData()
         {
             DataTable dt = new DataTable();
@@ -44,7 +45,7 @@ namespace msqPRJ
                 SqlDataAdapter da = new SqlDataAdapter(cmdText, con);
                 da.SelectCommand.Parameters.AddWithValue("@Amount", tB3);
                 da.SelectCommand.Parameters.AddWithValue("@TransactionType", cB1);
-                da.SelectCommand.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dtp;
+                da.SelectCommand.Parameters.Add("@Date", SqlDbType.Date).Value = dtp;
                 da.Fill(dt);
             }
 
