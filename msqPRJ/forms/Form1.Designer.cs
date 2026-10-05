@@ -70,13 +70,6 @@ namespace msqPRJ
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tP3Settings = new System.Windows.Forms.TabPage();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timerMassage = new System.Windows.Forms.Timer(this.components);
-            this.timerClearlblAssistant = new System.Windows.Forms.Timer(this.components);
-            this.msqPRJDataSet = new msqPRJ.msqPRJDataSet();
-            this.msqTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.msqTableTableAdapter = new msqPRJ.msqPRJDataSetTableAdapters.msqTableTableAdapter();
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Update = new System.Windows.Forms.DataGridViewButtonColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,6 +78,27 @@ namespace msqPRJ
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.countOfEdit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.msqTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.msqPRJDataSet = new msqPRJ.msqPRJDataSet();
+            this.tP3Settings = new System.Windows.Forms.TabPage();
+            this.btnGoToTrash = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSaveSettings = new System.Windows.Forms.Button();
+            this.btnRestore = new System.Windows.Forms.Button();
+            this.btnBackupNow = new System.Windows.Forms.Button();
+            this.lblLastBackup = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.numKeepCount = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.ChooseFoolder = new System.Windows.Forms.Button();
+            this.txtBackupPath = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerMassage = new System.Windows.Forms.Timer(this.components);
+            this.timerClearlblAssistant = new System.Windows.Forms.Timer(this.components);
+            this.msqTableTableAdapter = new msqPRJ.msqPRJDataSetTableAdapters.msqTableTableAdapter();
+            this.fbdBackup = new System.Windows.Forms.FolderBrowserDialog();
+            this.ofdRestore = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tP1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -92,8 +106,11 @@ namespace msqPRJ
             this.panel1.SuspendLayout();
             this.tP2Reports.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.msqTableBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet)).BeginInit();
+            this.tP3Settings.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numKeepCount)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -159,7 +176,7 @@ namespace msqPRJ
             // lblTime
             // 
             this.lblTime.AutoSize = true;
-            this.lblTime.Location = new System.Drawing.Point(353, 514);
+            this.lblTime.Location = new System.Drawing.Point(30, 33);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(46, 17);
             this.lblTime.TabIndex = 13;
@@ -544,45 +561,6 @@ namespace msqPRJ
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // tP3Settings
-            // 
-            this.tP3Settings.Location = new System.Drawing.Point(4, 25);
-            this.tP3Settings.Name = "tP3Settings";
-            this.tP3Settings.Size = new System.Drawing.Size(933, 610);
-            this.tP3Settings.TabIndex = 2;
-            this.tP3Settings.Text = "تنظیمات";
-            this.tP3Settings.UseVisualStyleBackColor = true;
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // timerMassage
-            // 
-            this.timerMassage.Interval = 3000;
-            this.timerMassage.Tick += new System.EventHandler(this.timerMassage_Tick);
-            // 
-            // timerClearlblAssistant
-            // 
-            this.timerClearlblAssistant.Interval = 20000;
-            this.timerClearlblAssistant.Tick += new System.EventHandler(this.timerClearlblAssistant_Tick);
-            // 
-            // msqPRJDataSet
-            // 
-            this.msqPRJDataSet.DataSetName = "msqPRJDataSet";
-            this.msqPRJDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // msqTableBindingSource
-            // 
-            this.msqTableBindingSource.DataMember = "msqTable";
-            this.msqTableBindingSource.DataSource = this.msqPRJDataSet;
-            // 
-            // msqTableTableAdapter
-            // 
-            this.msqTableTableAdapter.ClearBeforeFill = true;
-            // 
             // Delete
             // 
             this.Delete.HeaderText = "حذف";
@@ -661,6 +639,191 @@ namespace msqPRJ
             this.iD.ReadOnly = true;
             this.iD.Width = 125;
             // 
+            // msqTableBindingSource
+            // 
+            this.msqTableBindingSource.DataMember = "msqTable";
+            this.msqTableBindingSource.DataSource = this.msqPRJDataSet;
+            // 
+            // msqPRJDataSet
+            // 
+            this.msqPRJDataSet.DataSetName = "msqPRJDataSet";
+            this.msqPRJDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // tP3Settings
+            // 
+            this.tP3Settings.Controls.Add(this.btnGoToTrash);
+            this.tP3Settings.Controls.Add(this.groupBox1);
+            this.tP3Settings.Location = new System.Drawing.Point(4, 25);
+            this.tP3Settings.Name = "tP3Settings";
+            this.tP3Settings.Size = new System.Drawing.Size(933, 610);
+            this.tP3Settings.TabIndex = 2;
+            this.tP3Settings.Text = "تنظیمات";
+            this.tP3Settings.UseVisualStyleBackColor = true;
+            // 
+            // btnGoToTrash
+            // 
+            this.btnGoToTrash.Location = new System.Drawing.Point(8, 514);
+            this.btnGoToTrash.Name = "btnGoToTrash";
+            this.btnGoToTrash.Size = new System.Drawing.Size(917, 49);
+            this.btnGoToTrash.TabIndex = 1;
+            this.btnGoToTrash.Text = "حذف شده ها";
+            this.btnGoToTrash.UseVisualStyleBackColor = true;
+            this.btnGoToTrash.Click += new System.EventHandler(this.btnGoToTrash_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnSaveSettings);
+            this.groupBox1.Controls.Add(this.btnRestore);
+            this.groupBox1.Controls.Add(this.btnBackupNow);
+            this.groupBox1.Controls.Add(this.lblLastBackup);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.numKeepCount);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.ChooseFoolder);
+            this.groupBox1.Controls.Add(this.txtBackupPath);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Location = new System.Drawing.Point(8, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.groupBox1.Size = new System.Drawing.Size(917, 505);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "بکاپ";
+            // 
+            // btnSaveSettings
+            // 
+            this.btnSaveSettings.Location = new System.Drawing.Point(748, 430);
+            this.btnSaveSettings.Name = "btnSaveSettings";
+            this.btnSaveSettings.Size = new System.Drawing.Size(121, 30);
+            this.btnSaveSettings.TabIndex = 9;
+            this.btnSaveSettings.Text = "ذخیره تنظیمات";
+            this.btnSaveSettings.UseVisualStyleBackColor = true;
+            this.btnSaveSettings.Click += new System.EventHandler(this.btnSaveSettings_Click);
+            // 
+            // btnRestore
+            // 
+            this.btnRestore.Location = new System.Drawing.Point(48, 351);
+            this.btnRestore.Name = "btnRestore";
+            this.btnRestore.Size = new System.Drawing.Size(396, 36);
+            this.btnRestore.TabIndex = 8;
+            this.btnRestore.Text = "بازگردانی از بکاپ";
+            this.btnRestore.UseVisualStyleBackColor = true;
+            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
+            // 
+            // btnBackupNow
+            // 
+            this.btnBackupNow.BackColor = System.Drawing.Color.Black;
+            this.btnBackupNow.ForeColor = System.Drawing.Color.White;
+            this.btnBackupNow.Location = new System.Drawing.Point(473, 351);
+            this.btnBackupNow.Name = "btnBackupNow";
+            this.btnBackupNow.Size = new System.Drawing.Size(396, 36);
+            this.btnBackupNow.TabIndex = 7;
+            this.btnBackupNow.Text = "بکاپ گیری الان";
+            this.btnBackupNow.UseVisualStyleBackColor = false;
+            this.btnBackupNow.Click += new System.EventHandler(this.btnBackupNow_Click);
+            // 
+            // lblLastBackup
+            // 
+            this.lblLastBackup.AutoSize = true;
+            this.lblLastBackup.Location = new System.Drawing.Point(126, 216);
+            this.lblLastBackup.Name = "lblLastBackup";
+            this.lblLastBackup.Size = new System.Drawing.Size(110, 17);
+            this.lblLastBackup.TabIndex = 6;
+            this.lblLastBackup.Text = "هنوز بکاپی گرفته نشده";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(259, 216);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(70, 17);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "آخرین بکاپ :";
+            // 
+            // numKeepCount
+            // 
+            this.numKeepCount.Location = new System.Drawing.Point(579, 214);
+            this.numKeepCount.Maximum = new decimal(new int[] {
+            365,
+            0,
+            0,
+            0});
+            this.numKeepCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numKeepCount.Name = "numKeepCount";
+            this.numKeepCount.Size = new System.Drawing.Size(120, 22);
+            this.numKeepCount.TabIndex = 4;
+            this.numKeepCount.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(738, 216);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(134, 17);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "تعداد نسخه‌های نگه‌داری‌شده";
+            // 
+            // ChooseFoolder
+            // 
+            this.ChooseFoolder.Location = new System.Drawing.Point(75, 133);
+            this.ChooseFoolder.Name = "ChooseFoolder";
+            this.ChooseFoolder.Size = new System.Drawing.Size(111, 31);
+            this.ChooseFoolder.TabIndex = 2;
+            this.ChooseFoolder.Text = "انتخاب پوشه";
+            this.ChooseFoolder.UseVisualStyleBackColor = true;
+            this.ChooseFoolder.Click += new System.EventHandler(this.ChooseFoolder_Click);
+            // 
+            // txtBackupPath
+            // 
+            this.txtBackupPath.Location = new System.Drawing.Point(197, 137);
+            this.txtBackupPath.Name = "txtBackupPath";
+            this.txtBackupPath.ReadOnly = true;
+            this.txtBackupPath.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtBackupPath.Size = new System.Drawing.Size(569, 22);
+            this.txtBackupPath.TabIndex = 1;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(795, 140);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(77, 17);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "پوشه ی بکاپ :";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timerMassage
+            // 
+            this.timerMassage.Interval = 3000;
+            this.timerMassage.Tick += new System.EventHandler(this.timerMassage_Tick);
+            // 
+            // timerClearlblAssistant
+            // 
+            this.timerClearlblAssistant.Interval = 20000;
+            this.timerClearlblAssistant.Tick += new System.EventHandler(this.timerClearlblAssistant_Tick);
+            // 
+            // msqTableTableAdapter
+            // 
+            this.msqTableTableAdapter.ClearBeforeFill = true;
+            // 
+            // ofdRestore
+            // 
+            this.ofdRestore.FileName = "openFileDialog1";
+            this.ofdRestore.Filter = "Backup files|*.bak";
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(941, 639);
@@ -669,6 +832,7 @@ namespace msqPRJ
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "مدیریت مالی مسجد";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tP1.ResumeLayout(false);
@@ -682,8 +846,12 @@ namespace msqPRJ
             this.tP2Reports.ResumeLayout(false);
             this.tP2Reports.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.msqTableBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet)).EndInit();
+            this.tP3Settings.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numKeepCount)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -743,6 +911,20 @@ namespace msqPRJ
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridViewTextBoxColumn countOfEdit;
         private System.Windows.Forms.DataGridViewTextBoxColumn iD;
+        private System.Windows.Forms.Button btnGoToTrash;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnSaveSettings;
+        private System.Windows.Forms.Button btnRestore;
+        private System.Windows.Forms.Button btnBackupNow;
+        private System.Windows.Forms.Label lblLastBackup;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.NumericUpDown numKeepCount;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button ChooseFoolder;
+        private System.Windows.Forms.TextBox txtBackupPath;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.FolderBrowserDialog fbdBackup;
+        private System.Windows.Forms.OpenFileDialog ofdRestore;
 
         #endregion
 

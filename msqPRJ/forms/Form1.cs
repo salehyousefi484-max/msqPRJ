@@ -1,4 +1,5 @@
 ﻿using System;
+using msqPRJ.forms;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace msqPRJ
 {
@@ -32,6 +34,7 @@ namespace msqPRJ
             lblAssistant.Text = "";
             lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
             LoadData();
+            LoadSettingsTab();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -553,6 +556,140 @@ namespace msqPRJ
                 timerClearlblAssistant.Stop();
                 timerClearlblAssistant.Start();
             }
+        }
+
+        private void LoadSettingsTab()
+        {
+            txtBackupPath.Text = Properties.Settings.Default.BackupPath;
+
+            int keep = Properties.Settings.Default.KeepCount;
+            if (keep < numKeepCount.Minimum) keep = 30;
+            numKeepCount.Value = keep;
+
+            string last = Properties.Settings.Default.LastBackup;
+            lblLastBackup.Text = string.IsNullOrEmpty(last) ? "هنوز بکاپی گرفته نشده" : last;
+        }
+
+        private void ChooseFoolder_Click(object sender, EventArgs e)
+        {
+            fbdBackup.Description = "پوشه‌ی ذخیره‌ی بکاپ را انتخاب کنید";
+            if (fbdBackup.ShowDialog() == DialogResult.OK)
+                txtBackupPath.Text = fbdBackup.SelectedPath;
+        }
+
+        private void btnSaveSettings_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.BackupPath = txtBackupPath.Text;
+            Properties.Settings.Default.KeepCount = (int)numKeepCount.Value;
+            Properties.Settings.Default.Save();
+            ShowMsg("تنظیمات ذخیره شد.");
+        }
+
+        private void btnBackupNow_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtBackupPath.Text))
+            {
+                ShowMsg("اول پوشه‌ی بکاپ را انتخاب کنید.");
+                return;
+            }
+
+            try
+            {
+                BackupService.CreateBackup(txtBackupPath.Text, (int)numKeepCount.Value);
+
+                string stamp = DateHelper.ToShamsi(DateTime.Now) + " - " + DateTime.Now.ToString("HH:mm");
+                Properties.Settings.Default.LastBackup = stamp;
+                Properties.Settings.Default.Save();
+                lblLastBackup.Text = stamp;
+
+                ShowMsg("بکاپ با موفقیت گرفته شد.");
+            }
+            catch (Exception ex)
+            {
+                ShowMsg("بکاپ گرفته نشد:\n" + ex.Message);
+            }
+        }
+
+        private void btnRestore_Click(object sender, EventArgs e)
+        {
+            ofdRestore.Filter = "Backup files|*.bak";
+            if (!string.IsNullOrWhiteSpace(txtBackupPath.Text) && Directory.Exists(txtBackupPath.Text))
+                ofdRestore.InitialDirectory = txtBackupPath.Text;
+
+            if (ofdRestore.ShowDialog() != DialogResult.OK)
+                return;
+
+            var answer = MessageBox.Show(
+                "اطلاعات فعلی با این بکاپ جایگزین می‌شود. ادامه می‌دهید؟",
+                "تأیید بازگردانی",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2,
+                MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+
+            if (answer != DialogResult.Yes)
+                return;
+
+            try
+            {
+                BackupService.Restore(ofdRestore.FileName, txtBackupPath.Text);
+                ShowMsg("بازگردانی انجام شد. برنامه دوباره باز می‌شود.");
+                skipAutoBackup = true;
+                Application.Restart();
+            }
+            catch (Exception ex)
+            {
+                ShowMsg("بازگردانی انجام نشد:\n" + ex.Message);
+            }
+        }
+
+        private void ShowMsg(string text)
+        {
+            MessageBox.Show(text, "حسابداری مغازه",
+                MessageBoxButtons.OK, MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1,
+                MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+        }
+
+        private void btnGoToTrash_Click(object sender, EventArgs e)
+        {
+            new formTrash().ShowDialog();
+            LoadData();
+        }
+
+        private bool skipAutoBackup = false;
+
+        private void AutoBackup()
+        {
+            if (skipAutoBackup) return;
+
+            try
+            {
+                string folder = Properties.Settings.Default.BackupPath;
+                if (string.IsNullOrWhiteSpace(folder)) return;
+
+                string today = DateHelper.ToShamsi(DateTime.Now);
+                string last = Properties.Settings.Default.LastBackup;
+                if (!string.IsNullOrEmpty(last) && last.StartsWith(today)) return;
+
+                int keep = Properties.Settings.Default.KeepCount;
+                if (keep < 1) keep = 30;
+
+                BackupService.CreateBackup(folder, keep);
+
+                Properties.Settings.Default.LastBackup =
+                    today + " - " + DateTime.Now.ToString("HH:mm");
+                Properties.Settings.Default.Save();
+            }
+            catch
+            {
+                // خطای بکاپ نباید جلوی بسته شدن برنامه را بگیرد
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            AutoBackup();
         }
     }
 }
