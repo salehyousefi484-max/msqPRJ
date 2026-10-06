@@ -32,6 +32,7 @@ namespace msqPRJ
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tP1 = new System.Windows.Forms.TabPage();
+            this.mtbDate = new System.Windows.Forms.MaskedTextBox();
             this.lblAssistant = new System.Windows.Forms.Label();
             this.lblTxtResult = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
@@ -50,11 +51,11 @@ namespace msqPRJ
             this.label1 = new System.Windows.Forms.Label();
             this.CBTransactionType = new System.Windows.Forms.ComboBox();
             this.tbAmount = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.Save = new System.Windows.Forms.Button();
             this.BTNDeleteTexts = new System.Windows.Forms.Button();
             this.tP2Reports = new System.Windows.Forms.TabPage();
+            this.mtbSearchDate = new System.Windows.Forms.MaskedTextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.cbType = new System.Windows.Forms.CheckBox();
             this.cbDate = new System.Windows.Forms.CheckBox();
@@ -64,7 +65,6 @@ namespace msqPRJ
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -127,6 +127,7 @@ namespace msqPRJ
             // 
             // tP1
             // 
+            this.tP1.Controls.Add(this.mtbDate);
             this.tP1.Controls.Add(this.lblAssistant);
             this.tP1.Controls.Add(this.lblTxtResult);
             this.tP1.Controls.Add(this.lblTime);
@@ -139,7 +140,6 @@ namespace msqPRJ
             this.tP1.Controls.Add(this.label1);
             this.tP1.Controls.Add(this.CBTransactionType);
             this.tP1.Controls.Add(this.tbAmount);
-            this.tP1.Controls.Add(this.dateTimePicker1);
             this.tP1.Controls.Add(this.tbDescription);
             this.tP1.Controls.Add(this.Save);
             this.tP1.Controls.Add(this.BTNDeleteTexts);
@@ -150,6 +150,15 @@ namespace msqPRJ
             this.tP1.TabIndex = 0;
             this.tP1.Text = "ثبت سود/هزینه";
             this.tP1.UseVisualStyleBackColor = true;
+            // 
+            // mtbDate
+            // 
+            this.mtbDate.Location = new System.Drawing.Point(568, 318);
+            this.mtbDate.Mask = "0000/00/00";
+            this.mtbDate.Name = "mtbDate";
+            this.mtbDate.Size = new System.Drawing.Size(154, 22);
+            this.mtbDate.TabIndex = 16;
+            this.mtbDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblAssistant
             // 
@@ -332,18 +341,12 @@ namespace msqPRJ
             this.tbAmount.TabIndex = 4;
             this.tbAmount.Validated += new System.EventHandler(this.tbAmount_Validated);
             // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(523, 316);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePicker1.TabIndex = 3;
-            // 
             // tbDescription
             // 
             this.tbDescription.Location = new System.Drawing.Point(105, 316);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
+            this.tbDescription.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tbDescription.Size = new System.Drawing.Size(237, 76);
             this.tbDescription.TabIndex = 2;
             // 
@@ -369,6 +372,7 @@ namespace msqPRJ
             // 
             // tP2Reports
             // 
+            this.tP2Reports.Controls.Add(this.mtbSearchDate);
             this.tP2Reports.Controls.Add(this.label11);
             this.tP2Reports.Controls.Add(this.cbType);
             this.tP2Reports.Controls.Add(this.cbDate);
@@ -378,7 +382,6 @@ namespace msqPRJ
             this.tP2Reports.Controls.Add(this.textBox3);
             this.tP2Reports.Controls.Add(this.comboBox2);
             this.tP2Reports.Controls.Add(this.label10);
-            this.tP2Reports.Controls.Add(this.dateTimePicker2);
             this.tP2Reports.Controls.Add(this.comboBox3);
             this.tP2Reports.Controls.Add(this.label9);
             this.tP2Reports.Controls.Add(this.comboBox1);
@@ -391,6 +394,15 @@ namespace msqPRJ
             this.tP2Reports.TabIndex = 1;
             this.tP2Reports.Text = "جستجو و گزارش گیری";
             this.tP2Reports.UseVisualStyleBackColor = true;
+            // 
+            // mtbSearchDate
+            // 
+            this.mtbSearchDate.Location = new System.Drawing.Point(266, 86);
+            this.mtbSearchDate.Mask = "0000/00/00";
+            this.mtbSearchDate.Name = "mtbSearchDate";
+            this.mtbSearchDate.Size = new System.Drawing.Size(145, 22);
+            this.mtbSearchDate.TabIndex = 15;
+            this.mtbSearchDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label11
             // 
@@ -482,13 +494,6 @@ namespace msqPRJ
             this.label10.Size = new System.Drawing.Size(67, 17);
             this.label10.TabIndex = 6;
             this.label10.Text = "مبلغ (ریال) :";
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(281, 89);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePicker2.TabIndex = 5;
             // 
             // comboBox3
             // 
@@ -866,7 +871,6 @@ namespace msqPRJ
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CBTransactionType;
         private System.Windows.Forms.TextBox tbAmount;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.Button Save;
         private System.Windows.Forms.Button BTNDeleteTexts;
@@ -887,7 +891,6 @@ namespace msqPRJ
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -925,6 +928,8 @@ namespace msqPRJ
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.FolderBrowserDialog fbdBackup;
         private System.Windows.Forms.OpenFileDialog ofdRestore;
+        private System.Windows.Forms.MaskedTextBox mtbDate;
+        private System.Windows.Forms.MaskedTextBox mtbSearchDate;
 
         #endregion
 

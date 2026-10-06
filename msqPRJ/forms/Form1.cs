@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using Microsoft.Reporting.WinForms;
+using System.Globalization;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,9 @@ namespace msqPRJ
             lblTxtResult.Text = "";
             lblAssistant.Text = "";
             lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
+            mtbDate.Culture = System.Globalization.CultureInfo.InvariantCulture;
+            mtbDate.Text = DateHelper.ToShamsi(DateTime.Today);
+            dataGridView1.CellFormatting += DateHelper.GridCellFormatting;
             LoadData();
             LoadSettingsTab();
         }
@@ -46,11 +50,19 @@ namespace msqPRJ
         {
             try
             {
+                DateTime date;
+                if (!mtbDate.MaskCompleted || !DateHelper.TryParseShamsi(mtbDate.Text, out date))
+                {
+                    MessageBox.Show("تاریخ را درست وارد کنید. مثال: 1405/07/14");
+                    return;
+                }
+                DateTime fullDate = date.Date + DateTime.Now.TimeOfDay;
+
                 using (SqlConnection con = new SqlConnection(cs))
                 {
                     SqlCommand cmd = new SqlCommand("INSERT INTO msqTable(Amount,Date,TransactionType,IsDeleted,Description,CountOfEdit) VALUES(@Amount,@Date,@TransactionType,@IsDeleted,@Description,@CountOfEdit)", con);
                     cmd.Parameters.AddWithValue("@Amount", tbAmount.Text);
-                    cmd.Parameters.AddWithValue("@Date", dateTimePicker1.Value);
+                    cmd.Parameters.AddWithValue("@Date", fullDate);
                     cmd.Parameters.AddWithValue("@TransactionType", CBTransactionType.Text);
                     cmd.Parameters.AddWithValue("@IsDeleted", false);
                     cmd.Parameters.AddWithValue("@Description", tbDescription.Text);
@@ -271,10 +283,16 @@ namespace msqPRJ
                 {
                     if (comboBox3.Text != "")
                     {
+                        DateTime searchDate;
+                        if (!mtbSearchDate.MaskCompleted || !DateHelper.TryParseShamsi(mtbSearchDate.Text, out searchDate))
+                        {
+                            MessageBox.Show("تاریخ را درست وارد کنید. مثال: 1405/07/14");
+                            return;
+                        }
                         using (SqlConnection con = new SqlConnection(cs))
                         {
                             SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE CAST([Date] AS Date) {comboBox3.Text} @Date AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
+                            cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = searchDate;
 
                             SqlDataAdapter da = new SqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
@@ -313,11 +331,18 @@ namespace msqPRJ
                 {
                     if (comboBox3.Text != "" && comboBox2.Text != "" && textBox3.Text != "")
                     {
+                        DateTime searchDate;
+                        if (!mtbSearchDate.MaskCompleted || !DateHelper.TryParseShamsi(mtbSearchDate.Text, out searchDate))
+                        {
+                            MessageBox.Show("تاریخ را درست وارد کنید. مثال: 1405/07/14");
+                            return;
+                        }
+
                         using (SqlConnection con = new SqlConnection(cs))
                         {
                             SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount {comboBox2.Text} @Amount AND CAST([Date] AS Date) {comboBox3.Text} @Date AND IsDeleted=0", con);
                             cmd.Parameters.AddWithValue("@Amount", textBox3.Text);
-                            cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
+                            cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = searchDate;
 
                             SqlDataAdapter da = new SqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
@@ -335,10 +360,17 @@ namespace msqPRJ
                 {
                     if (comboBox3.Text != "" && comboBox1.Text != "")
                     {
+                        DateTime searchDate;
+                        if (!mtbSearchDate.MaskCompleted || !DateHelper.TryParseShamsi(mtbSearchDate.Text, out searchDate))
+                        {
+                            MessageBox.Show("تاریخ را درست وارد کنید. مثال: 1405/07/14");
+                            return;
+                        }
+
                         using (SqlConnection con = new SqlConnection(cs))
                         {
                             SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE CAST([Date] AS Date) {comboBox3.Text} @Date AND TransactionType=@TransactionType AND IsDeleted=0", con);
-                            cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
+                            cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = searchDate;
                             cmd.Parameters.AddWithValue("@TransactionType", comboBox1.Text);
 
                             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -381,10 +413,17 @@ namespace msqPRJ
                     {
                         using (SqlConnection con = new SqlConnection(cs))
                         {
+                            DateTime searchDate;
+                            if (!mtbSearchDate.MaskCompleted || !DateHelper.TryParseShamsi(mtbSearchDate.Text, out searchDate))
+                            {
+                                MessageBox.Show("تاریخ را درست وارد کنید. مثال: 1405/07/14");
+                                return;
+                            }
+
                             SqlCommand cmd = new SqlCommand($"SELECT * FROM msqTable WHERE Amount {comboBox2.Text} @Amount AND TransactionType=@TransactionType AND CAST([Date] AS Date) {comboBox3.Text} @Date AND IsDeleted=0", con);
                             cmd.Parameters.AddWithValue("@Amount", textBox3.Text);
                             cmd.Parameters.AddWithValue("@TransactionType", comboBox1.Text);
-                            cmd.Parameters.AddWithValue("@Date", SqlDbType.Date).Value = dateTimePicker2.Value.Date;
+                            cmd.Parameters.Add("@Date", SqlDbType.Date).Value = searchDate;
 
                             SqlDataAdapter da = new SqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
@@ -409,6 +448,13 @@ namespace msqPRJ
         {
             try
             {
+                DateTime reportDate;
+                if (!mtbSearchDate.MaskCompleted || !DateHelper.TryParseShamsi(mtbSearchDate.Text, out reportDate))
+                {
+                    MessageBox.Show("تاریخ را درست وارد کنید. مثال: 1405/07/14");
+                    return;
+                }
+
                 frmReport frm = new frmReport();
 
                 frm.cmdText = cmdT;
@@ -416,7 +462,7 @@ namespace msqPRJ
                 frm.cB1 = comboBox1.Text;
                 frm.cB2 = comboBox2.Text;
                 frm.cB3 = comboBox3.Text;
-                frm.dtp = dateTimePicker2.Value.Date;
+                frm.dtp = reportDate;
 
                 frm.ShowDialog();
             }

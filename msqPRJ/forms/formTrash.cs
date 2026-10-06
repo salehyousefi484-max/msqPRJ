@@ -22,6 +22,7 @@ namespace msqPRJ.forms
         {
             // TODO: This line of code loads data into the 'msqPRJDataSet1.msqTable' table. You can move, or remove it, as needed.
             this.msqTableTableAdapter.Fill(this.msqPRJDataSet1.msqTable);
+            dataGridView1.CellFormatting += DateHelper.GridCellFormatting;
             Loaddgv();
         }
 

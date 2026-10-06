@@ -121,6 +121,7 @@ SELECT ID, Amount, Date, TransactionType, IsDeleted, DeletedDate, Description, C
                 </xs:simpleType>
               </xs:element>
               <xs:element name="CountOfEdit" msprop:Generator_ColumnVarNameInTable="columnCountOfEdit" msprop:Generator_ColumnPropNameInRow="CountOfEdit" msprop:Generator_ColumnPropNameInTable="CountOfEditColumn" msprop:Generator_UserColumnName="CountOfEdit" type="xs:int" />
+              <xs:element name="ShamsiDate" msprop:Generator_ColumnVarNameInTable="columnShamsiDate" msprop:Generator_ColumnPropNameInRow="ShamsiDate" msprop:Generator_ColumnPropNameInTable="ShamsiDateColumn" msprop:Generator_UserColumnName="ShamsiDate" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

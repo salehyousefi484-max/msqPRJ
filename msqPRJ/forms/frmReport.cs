@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.Reporting.WinForms;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using msqPRJ.forms;
 
 namespace msqPRJ
 {
@@ -47,6 +48,15 @@ namespace msqPRJ
                 da.SelectCommand.Parameters.AddWithValue("@TransactionType", cB1);
                 da.SelectCommand.Parameters.Add("@Date", SqlDbType.Date).Value = dtp;
                 da.Fill(dt);
+
+                foreach (DataRow r in dt.Rows)
+                {
+                    if (r["Date"] != DBNull.Value)
+                    {
+                        DateTime d = (DateTime)r["Date"];
+                        r["ShamsiDate"] = DateHelper.ToShamsi(d) + " - " + d.ToString("HH:mm");
+                    }
+                }
             }
 
             reportViewer1.LocalReport.DataSources.Clear();

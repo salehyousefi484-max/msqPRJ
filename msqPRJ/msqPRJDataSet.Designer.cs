@@ -295,6 +295,8 @@ namespace msqPRJ {
             
             private global::System.Data.DataColumn columnCountOfEdit;
             
+            private global::System.Data.DataColumn columnShamsiDate;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public msqTableDataTable() {
@@ -394,6 +396,14 @@ namespace msqPRJ {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ShamsiDateColumn {
+                get {
+                    return this.columnShamsiDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -429,7 +439,7 @@ namespace msqPRJ {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public msqTableRow AddmsqTableRow(long Amount, System.DateTime Date, string TransactionType, bool IsDeleted, System.DateTime DeletedDate, string Description, int CountOfEdit) {
+            public msqTableRow AddmsqTableRow(long Amount, System.DateTime Date, string TransactionType, bool IsDeleted, System.DateTime DeletedDate, string Description, int CountOfEdit, string ShamsiDate) {
                 msqTableRow rowmsqTableRow = ((msqTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -439,7 +449,8 @@ namespace msqPRJ {
                         IsDeleted,
                         DeletedDate,
                         Description,
-                        CountOfEdit};
+                        CountOfEdit,
+                        ShamsiDate};
                 rowmsqTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowmsqTableRow);
                 return rowmsqTableRow;
@@ -477,6 +488,7 @@ namespace msqPRJ {
                 this.columnDeletedDate = base.Columns["DeletedDate"];
                 this.columnDescription = base.Columns["Description"];
                 this.columnCountOfEdit = base.Columns["CountOfEdit"];
+                this.columnShamsiDate = base.Columns["ShamsiDate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -498,6 +510,8 @@ namespace msqPRJ {
                 base.Columns.Add(this.columnDescription);
                 this.columnCountOfEdit = new global::System.Data.DataColumn("CountOfEdit", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCountOfEdit);
+                this.columnShamsiDate = new global::System.Data.DataColumn("ShamsiDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShamsiDate);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -757,6 +771,22 @@ namespace msqPRJ {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ShamsiDate {
+                get {
+                    try {
+                        return ((string)(this[this.tablemsqTable.ShamsiDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ShamsiDate\' in table \'msqTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablemsqTable.ShamsiDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsDateNull() {
                 return this.IsNull(this.tablemsqTable.DateColumn);
             }
@@ -789,6 +819,18 @@ namespace msqPRJ {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetDescriptionNull() {
                 this[this.tablemsqTable.DescriptionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsShamsiDateNull() {
+                return this.IsNull(this.tablemsqTable.ShamsiDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetShamsiDateNull() {
+                this[this.tablemsqTable.ShamsiDateColumn] = global::System.Convert.DBNull;
             }
         }
         
