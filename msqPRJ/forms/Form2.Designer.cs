@@ -32,7 +32,6 @@ namespace msqPRJ
             this.components = new System.ComponentModel.Container();
             this.CBTransactionType = new System.Windows.Forms.ComboBox();
             this.tbDescription = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.tbAmount = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -41,6 +40,7 @@ namespace msqPRJ
             this.lblTxtResult = new System.Windows.Forms.Label();
             this.Save = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.mtbDate = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // CBTransactionType
@@ -63,13 +63,6 @@ namespace msqPRJ
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.Size = new System.Drawing.Size(224, 71);
             this.tbDescription.TabIndex = 23;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(483, 162);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePicker1.TabIndex = 22;
             // 
             // tbAmount
             // 
@@ -146,16 +139,25 @@ namespace msqPRJ
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // mtbDate
+            // 
+            this.mtbDate.Location = new System.Drawing.Point(526, 167);
+            this.mtbDate.Mask = "0000/00/00";
+            this.mtbDate.Name = "mtbDate";
+            this.mtbDate.Size = new System.Drawing.Size(121, 22);
+            this.mtbDate.TabIndex = 28;
+            this.mtbDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.mtbDate);
             this.Controls.Add(this.lblTxtResult);
             this.Controls.Add(this.Save);
             this.Controls.Add(this.CBTransactionType);
             this.Controls.Add(this.tbDescription);
-            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.tbAmount);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -174,7 +176,6 @@ namespace msqPRJ
 
         private System.Windows.Forms.ComboBox CBTransactionType;
         private System.Windows.Forms.TextBox tbDescription;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TextBox tbAmount;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
@@ -183,5 +184,6 @@ namespace msqPRJ
         private System.Windows.Forms.Label lblTxtResult;
         private System.Windows.Forms.Button Save;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.MaskedTextBox mtbDate;
     }
 }

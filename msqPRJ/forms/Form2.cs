@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using msqPRJ.forms;
 
 namespace msqPRJ
 {
@@ -17,6 +18,8 @@ namespace msqPRJ
         {
             InitializeComponent();
         }
+
+        private DateTime originalDate;
 
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -29,7 +32,9 @@ namespace msqPRJ
         public void PassData(int ID, decimal Amount, object Date, string Description, int CountOfEdit)
         {
             tbAmount.Text = Amount.ToString();
-            dateTimePicker1.Value = Convert.ToDateTime(Date);
+            originalDate = Convert.ToDateTime(Date);
+            mtbDate.Culture = System.Globalization.CultureInfo.InvariantCulture;
+            mtbDate.Text = DateHelper.ToShamsi(originalDate);
             tbDescription.Text = Description.ToString();
             countOfEdit = CountOfEdit;
             id = ID;
@@ -49,10 +54,21 @@ namespace msqPRJ
                 {
                     using (SqlConnection con = new SqlConnection(cs))
                     {
+                        DateTime date;
+                        if (!mtbDate.MaskCompleted || !DateHelper.TryParseShamsi(mtbDate.Text, out date))
+                        {
+                            MessageBox.Show("تاریخ را درست وارد کنید. مثال: 1405/07/14");
+                            return;
+                        }
+
+
+                        DateTime fullDate = date.Date + originalDate.TimeOfDay;
+
+
                         SqlCommand cmd = new SqlCommand("UPDATE msqTable SET Amount=@Amount, Date=@Date, TransactionType=@TransactionType, Description=@Description, CountOfEdit=@CountOfEdit WHERE ID=@ID", con);
                         cmd.Parameters.AddWithValue("@ID", id);
                         cmd.Parameters.AddWithValue("@Amount", tbAmount.Text);
-                        cmd.Parameters.AddWithValue("@Date", dateTimePicker1.Value);
+                        cmd.Parameters.AddWithValue("@Date", fullDate);
                         cmd.Parameters.AddWithValue("@TransactionType", CBTransactionType.Text);
                         cmd.Parameters.AddWithValue("@IsDeleted", false);
                         cmd.Parameters.AddWithValue("@Description", tbDescription.Text);
