@@ -30,6 +30,7 @@ namespace msqPRJ
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.CBTransactionType = new System.Windows.Forms.ComboBox();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.tbAmount = new System.Windows.Forms.TextBox();
@@ -163,6 +164,7 @@ namespace msqPRJ
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form2";
             this.Text = "Form2";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);

@@ -301,7 +301,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -436,7 +435,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>به نام خدا</Value>
+                <Value>بسم الله الرحمن الرحیم</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -445,40 +444,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
         <Top>0.205in</Top>
-        <Left>3.24667in</Left>
+        <Left>3.18834in</Left>
         <Height>0.25in</Height>
-        <Width>1in</Width>
+        <Width>1.23333in</Width>
         <ZIndex>1</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox4">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>گزارش مالی مسجد امام حسن عسکری (ع)</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox4</rd:DefaultName>
-        <Top>0.66333in</Top>
-        <Left>4.86333in</Left>
-        <Height>0.25in</Height>
-        <Width>2.08333in</Width>
-        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>

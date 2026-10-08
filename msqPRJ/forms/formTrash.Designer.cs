@@ -30,10 +30,8 @@ namespace msqPRJ.forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formTrash));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.msqPRJDataSet1 = new msqPRJ.msqPRJDataSet1();
-            this.msqTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.msqTableTableAdapter = new msqPRJ.msqPRJDataSet1TableAdapters.msqTableTableAdapter();
             this.Return = new System.Windows.Forms.DataGridViewButtonColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.transactionTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,9 +39,12 @@ namespace msqPRJ.forms
             this.deletedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.msqTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.msqPRJDataSet1 = new msqPRJ.msqPRJDataSet1();
+            this.msqTableTableAdapter = new msqPRJ.msqPRJDataSet1TableAdapters.msqTableTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.msqTableBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -70,20 +71,6 @@ namespace msqPRJ.forms
             this.dataGridView1.Size = new System.Drawing.Size(1244, 639);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // msqPRJDataSet1
-            // 
-            this.msqPRJDataSet1.DataSetName = "msqPRJDataSet1";
-            this.msqPRJDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // msqTableBindingSource
-            // 
-            this.msqTableBindingSource.DataMember = "msqTable";
-            this.msqTableBindingSource.DataSource = this.msqPRJDataSet1;
-            // 
-            // msqTableTableAdapter
-            // 
-            this.msqTableTableAdapter.ClearBeforeFill = true;
             // 
             // Return
             // 
@@ -150,18 +137,33 @@ namespace msqPRJ.forms
             this.ID.ReadOnly = true;
             this.ID.Width = 125;
             // 
+            // msqTableBindingSource
+            // 
+            this.msqTableBindingSource.DataMember = "msqTable";
+            this.msqTableBindingSource.DataSource = this.msqPRJDataSet1;
+            // 
+            // msqPRJDataSet1
+            // 
+            this.msqPRJDataSet1.DataSetName = "msqPRJDataSet1";
+            this.msqPRJDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // msqTableTableAdapter
+            // 
+            this.msqTableTableAdapter.ClearBeforeFill = true;
+            // 
             // formTrash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1244, 639);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "formTrash";
             this.Text = "حذف شده ها";
             this.Load += new System.EventHandler(this.formTrash_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.msqTableBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msqPRJDataSet1)).EndInit();
             this.ResumeLayout(false);
 
         }

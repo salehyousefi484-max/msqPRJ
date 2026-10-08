@@ -41,13 +41,16 @@ namespace msqPRJ
         private void LoadReportData()
         {
             DataTable dt = new DataTable();
-            using (SqlConnection con = new SqlConnection("Data Source=.; Initial Catalog=msqPRJ; Integrated Security=true")) 
+            using (SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS; Initial Catalog=msqPRJ; Integrated Security=true")) 
             {
                 SqlDataAdapter da = new SqlDataAdapter(cmdText, con);
                 da.SelectCommand.Parameters.AddWithValue("@Amount", tB3);
                 da.SelectCommand.Parameters.AddWithValue("@TransactionType", cB1);
                 da.SelectCommand.Parameters.Add("@Date", SqlDbType.Date).Value = dtp;
                 da.Fill(dt);
+
+                if (!dt.Columns.Contains("ShamsiDate"))
+                    dt.Columns.Add("ShamsiDate", typeof(string));
 
                 foreach (DataRow r in dt.Rows)
                 {

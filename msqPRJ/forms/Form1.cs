@@ -22,7 +22,7 @@ namespace msqPRJ
             InitializeComponent();
         }
 
-        string cs = "Data Source=.; Initial Catalog=msqPRJ; Integrated Security=true";
+        string cs = @"Data Source=.\SQLEXPRESS; Initial Catalog=msqPRJ; Integrated Security=true";
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -36,6 +36,8 @@ namespace msqPRJ
             lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
             mtbDate.Culture = System.Globalization.CultureInfo.InvariantCulture;
             mtbDate.Text = DateHelper.ToShamsi(DateTime.Today);
+            mtbSearchDate.Culture = System.Globalization.CultureInfo.InvariantCulture;
+            mtbSearchDate.Text = DateHelper.ToShamsi(DateTime.Today);
             dataGridView1.CellFormatting += DateHelper.GridCellFormatting;
             LoadData();
             LoadSettingsTab();
@@ -53,32 +55,40 @@ namespace msqPRJ
                 DateTime date;
                 if (!mtbDate.MaskCompleted || !DateHelper.TryParseShamsi(mtbDate.Text, out date))
                 {
-                    MessageBox.Show("تاریخ را درست وارد کنید. مثال: 1405/07/14");
+                    MessageBox.Show("تاریخ را درست وارد کنید. مثال: 1405/01/01");
                     return;
                 }
                 DateTime fullDate = date.Date + DateTime.Now.TimeOfDay;
 
-                using (SqlConnection con = new SqlConnection(cs))
+                if (tbAmount.Text == "" || CBTransactionType.Text == "")
                 {
-                    SqlCommand cmd = new SqlCommand("INSERT INTO msqTable(Amount,Date,TransactionType,IsDeleted,Description,CountOfEdit) VALUES(@Amount,@Date,@TransactionType,@IsDeleted,@Description,@CountOfEdit)", con);
-                    cmd.Parameters.AddWithValue("@Amount", tbAmount.Text);
-                    cmd.Parameters.AddWithValue("@Date", fullDate);
-                    cmd.Parameters.AddWithValue("@TransactionType", CBTransactionType.Text);
-                    cmd.Parameters.AddWithValue("@IsDeleted", false);
-                    cmd.Parameters.AddWithValue("@Description", tbDescription.Text);
-                    cmd.Parameters.AddWithValue("@CountOfEdit", 0);
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
+                    MessageBox.Show("لطفا مبلغ یا نوع تراکنش را وارد کنید.");
+                    return;
                 }
+                else
+                {
+                    using (SqlConnection con = new SqlConnection(cs))
+                    {
+                        SqlCommand cmd = new SqlCommand("INSERT INTO msqTable(Amount,Date,TransactionType,IsDeleted,Description,CountOfEdit) VALUES(@Amount,@Date,@TransactionType,@IsDeleted,@Description,@CountOfEdit)", con);
+                        cmd.Parameters.AddWithValue("@Amount", tbAmount.Text);
+                        cmd.Parameters.AddWithValue("@Date", fullDate);
+                        cmd.Parameters.AddWithValue("@TransactionType", CBTransactionType.Text);
+                        cmd.Parameters.AddWithValue("@IsDeleted", false);
+                        cmd.Parameters.AddWithValue("@Description", tbDescription.Text);
+                        cmd.Parameters.AddWithValue("@CountOfEdit", 0);
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
 
-                LoadData();
-                lblTxtResult.Text = "با موفقیت ذخیره شد.";
-                timerMassage.Stop();
-                timerMassage.Start();
-                tbAmount.Text = "";
-                tbDescription.Text = "";
-                lblAssistant.Text = "";
+                    LoadData();
+                    lblTxtResult.Text = "با موفقیت ذخیره شد.";
+                    timerMassage.Stop();
+                    timerMassage.Start();
+                    tbAmount.Text = "";
+                    tbDescription.Text = "";
+                    lblAssistant.Text = "";
+                }
             }
 
             catch (Exception ex)
@@ -136,7 +146,7 @@ namespace msqPRJ
                 lblCost.Text = Cost.ToString();
             }
 
-            Resultant = Profit - Cost;
+            Resultant = Cost - Profit;
             lblResultant.Text = Resultant.ToString();
             if (Resultant < 0)
                 panel3.BackColor = Color.Red;

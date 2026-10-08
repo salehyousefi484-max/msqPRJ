@@ -26,7 +26,7 @@ namespace msqPRJ.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=msqPRJ;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;Initial Catalog=msqPRJ;Integrated Security=True")]
         public string msqPRJConnectionString {
             get {
                 return ((string)(this["msqPRJConnectionString"]));

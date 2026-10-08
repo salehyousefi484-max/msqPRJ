@@ -49,7 +49,7 @@ namespace msqPRJ
 
             else
             {
-                string cs = "Data Source=.; Initial Catalog=msqPRJ; Integrated Security=true";
+                string cs = @"Data Source=.\SQLEXPRESS; Initial Catalog=msqPRJ; Integrated Security=true";
                 try
                 {
                     using (SqlConnection con = new SqlConnection(cs))

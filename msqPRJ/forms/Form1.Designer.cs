@@ -30,6 +30,7 @@ namespace msqPRJ
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tP1 = new System.Windows.Forms.TabPage();
             this.mtbDate = new System.Windows.Forms.MaskedTextBox();
@@ -223,7 +224,7 @@ namespace msqPRJ
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.Red;
+            this.panel2.BackColor = System.Drawing.Color.LawnGreen;
             this.panel2.Controls.Add(this.lblCost);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Location = new System.Drawing.Point(375, 23);
@@ -247,13 +248,13 @@ namespace msqPRJ
             this.label6.Location = new System.Drawing.Point(141, 10);
             this.label6.Name = "label6";
             this.label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label6.Size = new System.Drawing.Size(72, 17);
+            this.label6.Size = new System.Drawing.Size(67, 17);
             this.label6.TabIndex = 0;
-            this.label6.Text = "هزینه امروز :";
+            this.label6.Text = "سود امروز :";
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.LawnGreen;
+            this.panel1.BackColor = System.Drawing.Color.Red;
             this.panel1.Controls.Add(this.lblProfit);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Location = new System.Drawing.Point(622, 23);
@@ -274,12 +275,12 @@ namespace msqPRJ
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(146, 10);
+            this.label5.Location = new System.Drawing.Point(143, 10);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label5.Size = new System.Drawing.Size(67, 17);
+            this.label5.Size = new System.Drawing.Size(72, 17);
             this.label5.TabIndex = 0;
-            this.label5.Text = "سود امروز :";
+            this.label5.Text = "هزینه امروز :";
             // 
             // label4
             // 
@@ -491,9 +492,10 @@ namespace msqPRJ
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(414, 21);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(67, 17);
+            this.label10.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label10.Size = new System.Drawing.Size(71, 17);
             this.label10.TabIndex = 6;
-            this.label10.Text = "مبلغ (ریال) :";
+            this.label10.Text = ": مبلغ (ریال) ";
             // 
             // comboBox3
             // 
@@ -833,8 +835,8 @@ namespace msqPRJ
             // 
             this.ClientSize = new System.Drawing.Size(941, 639);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "مدیریت مالی مسجد";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);

@@ -12,7 +12,7 @@ namespace msqPRJ.forms
     public static class AppPaths
     {
         public static readonly string ConnString =
-       @"Data Source=.;Initial Catalog=msqPRJ;Integrated Security=True";
+       @"Data Source=.\SQLEXPRESS; Initial Catalog=msqPRJ; Integrated Security=true";
 
         public static string DbName
         {

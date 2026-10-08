@@ -31,6 +31,7 @@ namespace msqPRJ
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReport));
             this.msqTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.msqPRJDataSet1 = new msqPRJ.msqPRJDataSet();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
@@ -72,6 +73,7 @@ namespace msqPRJ
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(986, 568);
             this.Controls.Add(this.reportViewer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmReport";
             this.Text = "frmReport";
             this.Load += new System.EventHandler(this.frmReport_Load);
